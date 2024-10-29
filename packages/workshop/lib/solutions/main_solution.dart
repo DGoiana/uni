@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:workshop/exam.dart';
-import 'package:workshop/solutions/exam_info_solution.dart';
+import 'package:provider/provider.dart';
+import 'package:workshop/solutions/exam_list_solution.dart';
+import 'package:workshop/solutions/exam_provider_solution.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ExamProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
+//TODO: inject ExamInfo into the canvas
 class MyApp extends StatelessWidget {
-  final exam = Exam(
-      3, DateTime(2025, 2, 30, 16), DateTime(2025, 2, 30, 17), "PROG", "FEUP");
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.light(),
-      home: Scaffold(
-        body: Center(
-          child: IntrinsicHeight(
-            child: IntrinsicWidth(
-              child: ExamInfo(exam: exam),
-            ),
-          ),
-        ),
-      ),
+      home: ExamListSolution(),
     );
   }
 }

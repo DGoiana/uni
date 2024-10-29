@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => ExamProvider()), // TODO: create the provider
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
+//TODO: inject ExamList into the canvas
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.light(),
-        home: Scaffold(
-          body: Center(
-            child: IntrinsicHeight(
-              child: IntrinsicWidth(
-                  child: Container() // you maybe want to change this...,
-                  ),
-            ),
-          ),
-        ));
+      theme: ThemeData.light(),
+      home: Container(), // maybe here?
+    );
   }
 }
 
